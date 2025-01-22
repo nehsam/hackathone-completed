@@ -1,4 +1,4 @@
-;
+"use client";
 import Image from "next/image";
 import girl from "@/app/images/none.png";
 import facebookIcon from "@/app/images/fffb.png";

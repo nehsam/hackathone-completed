@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
-import Image from "next/image";  // Importing Image for optimization
+
 
 interface CustomerDetails {
   name: string;
