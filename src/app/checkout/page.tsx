@@ -4,13 +4,6 @@ import { useState } from "react";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import Image from "next/image";  // Importing Image for optimization
 
-interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  quantity: number;
-}
-
 interface CustomerDetails {
   name: string;
   email: string;
@@ -27,13 +20,12 @@ const Checkout = () => {
     address: "",
     city: "",
     postalCode: "",
-    country: ""
+    country: "",
   });
   
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const validateForm = (): boolean => {
     if (!customerDetails.name.trim()) {
@@ -74,7 +66,6 @@ const Checkout = () => {
       setIsLoading(true);
       setMessage("");
       setIsError(false);
-      setIsSuccess(false);
 
       if (!validateForm()) {
         setIsLoading(false);
@@ -101,7 +92,6 @@ const Checkout = () => {
       }
 
       const data = await response.json();
-      setIsSuccess(true);
       setMessage("Order placed successfully! Your order ID is: " + data.sanityOrderId);
       
       // Reset form
@@ -114,10 +104,14 @@ const Checkout = () => {
         country: ""
       });
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Order error:', error);
       setIsError(true);
-      setMessage(error.message || "Failed to place order. Please try again.");
+      if (error instanceof Error) {
+        setMessage(error.message || "Failed to place order. Please try again.");
+      } else {
+        setMessage("Failed to place order. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
