@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar1 from "./component/navbar1";
 import Topsale from "./component/navbar1 copy";
 import Footer from "./component/footer";
 import {
   ClerkProvider,
-} from '@clerk/nextjs'
+} from "@clerk/nextjs"
 ;
+import Navbar from "./component/navbar1";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,8 +26,7 @@ export default function RootLayout({
           <div className="hidden lg:block">
             <Topsale />
           </div>
-          <Navbar1 />
-          
+          <Navbar/>
           {children}
          
           <Footer />
