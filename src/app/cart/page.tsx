@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image';
 
 type CartItem = {
   _id: string;
@@ -85,41 +86,41 @@ export default function Cart() {
               {cart.map((item) => (
                 <div key={item._id} className="bg-white rounded-lg shadow-sm p-4 hover:shadow-lg transition-shadow duration-200">
                   <div className="flex items-start gap-4">
-                    <div className="relative w-24 h-24 flex-shrink-0">
-                      <img
-                        src={item.imageUrl || "/api/placeholder/96/96"}
-                        alt={item.title}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                    <Image
+                      src={item.imageUrl || "/api/placeholder/96/96"}
+                      alt={item.title}
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <div className="flex-grow">
+                    <div className="flex justify-between">
+                      <h3 className="font-semibold text-lg text-gray-900">{item.title}</h3>
+                      <button
+                        onClick={() => handleRemoveItem(item._id)}
+                        className="text-red-500 hover:text-red-700 transition-colors"
+                        aria-label="Remove item"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
                     </div>
-                    <div className="flex-grow">
-                      <div className="flex justify-between">
-                        <h3 className="font-semibold text-lg text-gray-900">{item.title}</h3>
-                        <button
-                          onClick={() => handleRemoveItem(item._id)}
-                          className="text-red-500 hover:text-red-700 transition-colors"
-                          aria-label="Remove item"
-                        >
-                          <Trash2 className="h-5 w-5" />
-                        </button>
-                      </div>
-                      <p className="text-lg font-semibold text-blue-600">${item.price}</p>
-                      <div className="flex items-center gap-3 mt-2">
-                        <button
-                          onClick={() => handleUpdateQuantity(item._id, item.quantity - 1)}
-                          className="p-1 rounded-full hover:bg-gray-100"
-                          disabled={item.quantity <= 1}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span className="w-8 text-center">{item.quantity}</span>
-                        <button
-                          onClick={() => handleUpdateQuantity(item._id, item.quantity + 1)}
-                          className="p-1 rounded-full hover:bg-gray-100"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      </div>
+                    <p className="text-lg font-semibold text-blue-600">${item.price}</p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <button
+                        onClick={() => handleUpdateQuantity(item._id, item.quantity - 1)}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                        disabled={item.quantity <= 1}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => handleUpdateQuantity(item._id, item.quantity + 1)}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                      >
+                        <Plus className="h-4 w-4" />
+                      </button>
                     </div>
                   </div>
                 </div>
