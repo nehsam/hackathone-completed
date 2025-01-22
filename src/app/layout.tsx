@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Topsale from "./component/navbar1 copy";
 import Footer from "./component/footer";
-import {
-  ClerkProvider,
-} from "@clerk/nextjs"
-;
 import Navbar from "./component/navbar1";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider >
     <html>
         <body>
           {/* Hide Topsale on mobile */}
