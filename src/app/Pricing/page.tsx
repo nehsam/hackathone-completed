@@ -11,7 +11,6 @@ import cm5 from "@/app/images/fa-brands-5.png";
 import cm6 from "@/app/images/fa-brands-6.png";
 import arrow2 from "@/app/images/Vector (1).png"
 
-import linkdin from "@/app/images/logos_linkedin-icon.png"
 import { FaFacebookSquare, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
+import Image from "next/image";  // Importing Image for optimization
 
 interface CartItem {
   id: string;
@@ -281,11 +282,7 @@ const Checkout = () => {
 
             {/* Message Display */}
             {message && (
-              <div className={`mt-4 p-4 rounded-lg flex items-center space-x-2 ${
-                isError 
-                  ? "bg-red-50 text-red-700" 
-                  : "bg-green-50 text-green-700"
-              }`}>
+              <div className={`mt-4 p-4 rounded-lg flex items-center space-x-2 ${isError ? "bg-red-50 text-red-700" : "bg-green-50 text-green-700"}`}>
                 {isError ? (
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 ) : (

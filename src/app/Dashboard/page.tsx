@@ -30,17 +30,11 @@ const Dashboard = () => {
   }
 
   const [products, setProducts] = useState<Product[]>([]);
-  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     axios
       .get('/api/getProducts')
       .then((response) => setProducts(response.data))
-      .catch((error) => console.log(error));
-
-    axios
-      .get('/api/getOrders')
-      .then((response) => setOrders(response.data))
       .catch((error) => console.log(error));
   }, []);
 

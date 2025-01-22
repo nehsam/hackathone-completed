@@ -1,5 +1,3 @@
-// app/api/orders/route/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 
@@ -46,10 +44,18 @@ export async function POST(req: NextRequest) {
       }
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Order processing error:', error);
+
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { error: error.message || 'Failed to process order' },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { error: error.message || 'Failed to process order' },
+      { error: 'An unknown error occurred' },
       { status: 500 }
     );
   }
