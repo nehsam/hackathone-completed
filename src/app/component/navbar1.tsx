@@ -1,15 +1,17 @@
 "use client";
+
 import { UserButton } from "@clerk/nextjs";
 import { LucideShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { FaRegHeart, FaTimes, FaSearch } from "react-icons/fa";
 import { RiDashboardLine } from "react-icons/ri";
 import { useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const userId = null; // Replace with actual logic to get userId
+  const { isSignedIn, userId } = useAuth(); // Proper usage of Clerk's useAuth hook
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -122,8 +124,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                {!userId ? (
-                  <>
+                {isSignedIn ? (
+                  <UserButton />
+                ) : (
+                  <div className="flex gap-4">
                     <Link
                       href="/sign-in"
                       className="text-[18px] font-semibold hover:text-blue-500 transition"
@@ -136,11 +140,10 @@ const Navbar = () => {
                     >
                       Register
                     </Link>
-                  </>
-                ) : (
-                  <UserButton />
+                  </div>
                 )}
               </li>
+
               <li className="flex flex-row justify-between gap-5">
                 <a
                   href="/cart"
